@@ -16,7 +16,7 @@ import lale.docstrings
 import lale.helpers
 import lale.operators
 import numpy as np
-
+import pandas as pd
 class RelationalImpl():
   def __init__(self, operator = None):
     self.operator = operator
@@ -24,13 +24,13 @@ class RelationalImpl():
   def fit(self, X, y = None):
     if self.operator is None:
       raise ValueError("The pipeline object can't be None at the time of fit.")
-    if isinstance(X, list):
+    if not (isinstance(X, np.ndarray) or isinstance(X, pd.DataFrame)):
         raise ValueError("""Relational operator's fit does not accept data before join and aggregates. 
     Please pass a preprocessed dataset that is either a numpy array or a pandas dataframe.""")
     return self
 
   def transform(self, X):
-    if isinstance(X, list):
+    if not (isinstance(X, np.ndarray) or isinstance(X, pd.DataFrame)):
         raise ValueError("""Relational operator's transform does not accept data before join and aggregates. 
     Please pass a preprocessed dataset that is either a numpy array or a pandas dataframe.""")
     return X
