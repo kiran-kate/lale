@@ -128,7 +128,7 @@ _hyperparams_schema = {
                         },
                         {"enum": ["auto", "sqrt", "log2", None]},
                     ],
-                    "default": "auto",
+                    "default": None,
                     "description": "The number of features to consider when looking for the best split.",
                 },
                 "random_state": {
@@ -141,7 +141,7 @@ _hyperparams_schema = {
                         },
                         {"description": "Explicit seed.", "type": "integer"},
                     ],
-                    "default": None,
+                    "default": 33,
                 },
                 "max_leaf_nodes": {
                     "anyOf": [
@@ -176,6 +176,7 @@ _hyperparams_schema = {
                         },
                         {"enum": ["balanced", None]},
                     ],
+                    "default": "balanced",
                     "description": "Weights associated with classes in the form ``{class_label: weight}``.",
                 },
                 "presort": {
@@ -332,30 +333,30 @@ DecisionTreeClassifier = lale.operators.make_operator(
     DecisionTreeClassifierImpl, _combined_schemas
 )
 
-if sklearn.__version__ >= "0.22":
-    # old: https://scikit-learn.org/0.20/modules/generated/sklearn.tree.DecisionTreeClassifier.html
-    # new: https://scikit-learn.org/0.22/modules/generated/sklearn.tree.DecisionTreeClassifier.html
-    from lale.schemas import AnyOf, Bool, Enum, Float
+# if sklearn.__version__ >= "0.22":
+#     # old: https://scikit-learn.org/0.20/modules/generated/sklearn.tree.DecisionTreeClassifier.html
+#     # new: https://scikit-learn.org/0.22/modules/generated/sklearn.tree.DecisionTreeClassifier.html
+#     from lale.schemas import AnyOf, Bool, Enum, Float
 
-    DecisionTreeClassifier = DecisionTreeClassifier.customize_schema(
-        presort=AnyOf(
-            types=[Bool(), Enum(["deprecated"])],
-            desc="This parameter is deprecated and will be removed in v0.24.",
-            default="deprecated",
-        ),
-        ccp_alpha=Float(
-            desc="Complexity parameter used for Minimal Cost-Complexity Pruning. The subtree with the largest cost complexity that is smaller than ccp_alpha will be chosen. By default, no pruning is performed.",
-            default=0.0,
-            forOptimizer=False,
-            min=0.0,
-            maxForOptimizer=0.1,
-        ),
-    )
+# DecisionTreeClassifier = DecisionTreeClassifier.customize_schema(
+#     presort=AnyOf(
+#         types=[Bool(), Enum(["deprecated"])],
+#         desc="This parameter is deprecated and will be removed in v0.24.",
+#         default="deprecated",
+#     ),
+#     ccp_alpha=Float(
+#         desc="Complexity parameter used for Minimal Cost-Complexity Pruning. The subtree with the largest cost complexity that is smaller than ccp_alpha will be chosen. By default, no pruning is performed.",
+#         default=0.0,
+#         forOptimizer=False,
+#         min=0.0,
+#         maxForOptimizer=0.1,
+#     ),
+# )
 
-if sklearn.__version__ >= "0.24":
-    # old: https://scikit-learn.org/0.22/modules/generated/sklearn.tree.DecisionTreeClassifier.html
-    # new: https://scikit-learn.org/0.24/modules/generated/sklearn.tree.DecisionTreeClassifier.html
-    DecisionTreeClassifier = DecisionTreeClassifier.customize_schema(presort=None)
+# if sklearn.__version__ >= "0.24":
+#     # old: https://scikit-learn.org/0.22/modules/generated/sklearn.tree.DecisionTreeClassifier.html
+#     # new: https://scikit-learn.org/0.24/modules/generated/sklearn.tree.DecisionTreeClassifier.html
+#     DecisionTreeClassifier = DecisionTreeClassifier.customize_schema(presort=None)
 
 lale.docstrings.set_docstrings(
     DecisionTreeClassifierImpl, DecisionTreeClassifier._schemas

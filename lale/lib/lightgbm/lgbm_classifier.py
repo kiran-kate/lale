@@ -158,7 +158,7 @@ _hyperparams_schema = {
                     "minimumForOptimizer": 50,
                     "maximumForOptimizer": 1000,
                     "distribution": "uniform",
-                    "default": 200,
+                    "default": 100,
                     "description": "Number of boosted trees to fit.",
                 },
                 "subsample_for_bin": {
@@ -176,7 +176,7 @@ _hyperparams_schema = {
                 },
                 "class_weight": {
                     "anyOf": [{"type": "object"}, {"enum": ["balanced", None]}],
-                    "default": None,
+                    "default": "balanced",
                     "description": "Weights associated with classes",
                 },
                 "min_split_gain": {
@@ -245,12 +245,12 @@ _hyperparams_schema = {
                         {"laleType": "numpy.random.RandomState"},
                         {"enum": [None]},
                     ],
-                    "default": None,
+                    "default": 33,
                     "description": "Random number seed. If None, default seeds in C++ code will be used.",
                 },
                 "n_jobs": {
                     "type": "integer",
-                    "default": -1,
+                    "default": 4,
                     "description": "Number of parallel threads.",
                 },
                 "silent": {

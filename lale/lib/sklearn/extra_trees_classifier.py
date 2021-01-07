@@ -161,7 +161,7 @@ _hyperparams_schema = {
                 },
                 "n_jobs": {
                     "anyOf": [{"type": "integer"}, {"enum": [None]}],
-                    "default": None,
+                    "default": 4,
                     "description": "The number of jobs to run in parallel for both `fit` and `predict`.",
                 },
                 "random_state": {
@@ -170,7 +170,7 @@ _hyperparams_schema = {
                         {"laleType": "numpy.random.RandomState"},
                         {"enum": [None]},
                     ],
-                    "default": None,
+                    "default": 33,
                     "description": "If int, random_state is the seed used by the random number generator;",
                 },
                 "verbose": {
@@ -189,7 +189,7 @@ _hyperparams_schema = {
                         {"enum": ["balanced", "balanced_subsample", None]},
                     ],
                     "description": "Weights associated with classes in the form ``{class_label: weight}``.",
-                    "default": None,
+                    "default": "balanced",
                 },
             },
         }
@@ -301,13 +301,13 @@ if sklearn.__version__ >= "0.22":
             minForOptimizer=10,
             maxForOptimizer=100,
         ),
-        ccp_alpha=Float(
-            desc="Complexity parameter used for Minimal Cost-Complexity Pruning. The subtree with the largest cost complexity that is smaller than ccp_alpha will be chosen. By default, no pruning is performed.",
-            default=0.0,
-            forOptimizer=False,
-            min=0.0,
-            maxForOptimizer=0.1,
-        ),
+        # ccp_alpha=Float(
+        #     desc="Complexity parameter used for Minimal Cost-Complexity Pruning. The subtree with the largest cost complexity that is smaller than ccp_alpha will be chosen. By default, no pruning is performed.",
+        #     default=0.0,
+        #     forOptimizer=False,
+        #     min=0.0,
+        #     maxForOptimizer=0.1,
+        # ),
         max_samples=AnyOf(
             types=[
                 Null(desc="Draw X.shape[0] samples."),

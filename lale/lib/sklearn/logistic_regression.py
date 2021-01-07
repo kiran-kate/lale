@@ -236,7 +236,7 @@ proportional to class frequencies in the input data as "n_samples / (n_classes *
                             "forOptimizer": False,
                         },
                     ],
-                    "default": None,
+                    "default": "balanced",
                 },
                 "random_state": {
                     "description": "Seed of pseudo-random number generator for shuffling data when solver == ‘sag’, ‘saga’ or ‘liblinear’.",
@@ -251,7 +251,7 @@ proportional to class frequencies in the input data as "n_samples / (n_classes *
                         },
                         {"description": "Explicit seed.", "type": "integer"},
                     ],
-                    "default": None,
+                    "default": 33,
                 },
                 "max_iter": {
                     "description": "Maximum number of iterations for solvers to converge.",
@@ -302,7 +302,7 @@ not.""",
                             "minimum": 1,
                         },
                     ],
-                    "default": None,
+                    "default": 1,
                 },
             },
         },
@@ -466,12 +466,12 @@ if sklearn.__version__ >= "0.22":
             solver=Enum(
                 values=["newton-cg", "lbfgs", "liblinear", "sag", "saga"],
                 desc="Algorithm for optimization problem.",
-                default="lbfgs",
+                default="liblinear",
             ),
             multi_class=Enum(
                 values=["auto", "ovr", "multinomial"],
                 desc="If the option chosen is `ovr`, then a binary problem is fit for each label. For `multinomial` the loss minimised is the multinomial loss fit across the entire probability distribution, even when the data is binary. `multinomial` is unavailable when solver=`liblinear`. `auto` selects `ovr` if the data is binary, or if solver=`liblinear`, and otherwise selects `multinomial`.",
-                default="auto",
+                default="ovr",
             ),
             l1_ratio=AnyOf(
                 types=[Float(min=0.0, max=1.0), Null()],

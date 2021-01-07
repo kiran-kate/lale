@@ -160,7 +160,7 @@ _hyperparams_schema = {
                         {"laleType": "numpy.random.RandomState"},
                         {"enum": [None]},
                     ],
-                    "default": None,
+                    "default": 33,
                     "description": "If int, random_state is the seed used by the random number generator;",
                 },
                 "max_features": {
@@ -357,25 +357,25 @@ GradientBoostingClassifier = lale.operators.make_operator(
     GradientBoostingClassifierImpl, _combined_schemas
 )
 
-if sklearn.__version__ >= "0.22":
-    # old: https://scikit-learn.org/0.20/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html
-    # new: https://scikit-learn.org/0.22/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html
-    from lale.schemas import AnyOf, Bool, Enum, Float
+# if sklearn.__version__ >= "0.22":
+#     # old: https://scikit-learn.org/0.20/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html
+#     # new: https://scikit-learn.org/0.22/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html
+#     from lale.schemas import AnyOf, Bool, Enum, Float
 
-    GradientBoostingClassifier = GradientBoostingClassifier.customize_schema(
-        presort=AnyOf(
-            types=[Bool(), Enum(["deprecated", "auto"])],
-            desc="This parameter is deprecated and will be removed in v0.24.",
-            default="deprecated",
-        ),
-        ccp_alpha=Float(
-            desc="Complexity parameter used for Minimal Cost-Complexity Pruning. The subtree with the largest cost complexity that is smaller than ccp_alpha will be chosen. By default, no pruning is performed.",
-            default=0.0,
-            forOptimizer=False,
-            min=0.0,
-            maxForOptimizer=0.1,
-        ),
-    )
+# GradientBoostingClassifier = GradientBoostingClassifier.customize_schema(
+#     presort=AnyOf(
+#         types=[Bool(), Enum(["deprecated", "auto"])],
+#         desc="This parameter is deprecated and will be removed in v0.24.",
+#         default="deprecated",
+#     ),
+#     ccp_alpha=Float(
+#         desc="Complexity parameter used for Minimal Cost-Complexity Pruning. The subtree with the largest cost complexity that is smaller than ccp_alpha will be chosen. By default, no pruning is performed.",
+#         default=0.0,
+#         forOptimizer=False,
+#         min=0.0,
+#         maxForOptimizer=0.1,
+#     ),
+# )
 
 if sklearn.__version__ >= "0.24":
     # old: https://scikit-learn.org/0.22/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html

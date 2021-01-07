@@ -150,7 +150,7 @@ _hyperparams_schema = {
                         {"enum": ["balanced", None]},
                     ],
                     "description": "Weights associated with classes in the form ``{class_label: weight}``.",
-                    "default": None,
+                    "default": "balanced",
                 },
                 "random_state": {
                     "anyOf": [
@@ -158,7 +158,7 @@ _hyperparams_schema = {
                         {"laleType": "numpy.random.RandomState"},
                         {"enum": [None]},
                     ],
-                    "default": None,
+                    "default": 33,
                     "description": "The seed of the pseudo random number generator to use when shuffling",
                 },
             },

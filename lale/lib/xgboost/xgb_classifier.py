@@ -189,7 +189,7 @@ _hyperparams_schema = {
                 "max_depth": {
                     "description": "Maximum tree depth for base learners.",
                     "type": "integer",
-                    "default": 4,
+                    "default": 3,
                     "minimum": 0,
                     "distribution": "uniform",
                     "minimumForOptimizer": 1,
@@ -213,7 +213,7 @@ _hyperparams_schema = {
                 "verbosity": {
                     "description": "The degree of verbosity.",
                     "type": "integer",
-                    "default": 1,
+                    "default": 0,
                     "minimum": 0,
                     "maximum": 3,
                 },
@@ -244,12 +244,12 @@ _hyperparams_schema = {
 Default to auto. If this parameter is set to default, XGBoost will choose the most conservative option available.
 Refer to https://xgboost.readthedocs.io/en/latest/parameter.html. """,
                     "enum": ["auto", "exact", "approx", "hist", "gpu_hist"],
-                    "default": "auto",
+                    "default": "hist",
                 },
                 "n_jobs": {
                     "type": "integer",
                     "description": "Number of parallel threads used to run xgboost.  (replaces ``nthread``)",
-                    "default": 1,
+                    "default": 4,
                 },
                 "nthread": {
                     "anyOf": [{"type": "integer"}, {"enum": [None]}],
@@ -266,7 +266,7 @@ Refer to https://xgboost.readthedocs.io/en/latest/parameter.html. """,
                 "min_child_weight": {
                     "type": "integer",
                     "description": "Minimum sum of instance weight(hessian) needed in a child.",
-                    "default": 10,
+                    "default": 1,
                     "distribution": "uniform",
                     "minimumForOptimizer": 2,
                     "maximumForOptimizer": 20,
@@ -345,7 +345,7 @@ Refer to https://xgboost.readthedocs.io/en/latest/parameter.html. """,
                 "random_state": {
                     "type": "integer",
                     "description": "Random number seed.  (replaces seed)",
-                    "default": 0,
+                    "default": 33,
                 },
                 "missing": {
                     "anyOf": [{"type": "number",}, {"enum": [None],}],
@@ -355,7 +355,7 @@ Refer to https://xgboost.readthedocs.io/en/latest/parameter.html. """,
                 },
                 "silent": {
                     "anyOf": [{"type": "boolean",}, {"enum": [None],}],
-                    "default": None,
+                    "default": True,
                     "description": "deprecated and replaced with verbosity, but adding to be backward compatible. ",
                 },
                 "seed": {
